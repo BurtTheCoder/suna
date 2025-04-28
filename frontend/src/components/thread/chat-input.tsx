@@ -82,7 +82,11 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(({
     { id: "sonnet-3.7", label: "Sonnet 3.7" },
     { id: "sonnet-3.7-thinking", label: "Sonnet 3.7 (Thinking)" },
     { id: "gpt-4.1", label: "GPT-4.1" },
-    { id: "gemini-flash-2.5", label: "Gemini Flash 2.5" }
+    { id: "gemini-flash-2.5", label: "Gemini Flash 2.5" },
+    // AWS Bedrock models
+    { id: "bedrock/anthropic.claude-3-7-sonnet-20250219-v1:0", label: "Bedrock Claude 3.7" },
+    { id: "bedrock/anthropic.claude-3-sonnet-20240229-v1:0", label: "Bedrock Claude 3 Sonnet" },
+    { id: "bedrock/meta.llama3-70b-instruct-v1:0", label: "Bedrock Llama 3 70B" }
   ];
 
   // Initialize state with the default model
@@ -424,7 +428,7 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(({
         </div>
         
         <div className="flex items-center gap-2 pl-2 flex-shrink-0">
-          {/* {!isAgentRunning && (
+          {!isAgentRunning && (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -469,7 +473,7 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(({
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-          )} */}
+          )}
           
           {!hideAttachments && (
             <TooltipProvider>
@@ -558,4 +562,4 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(({
 });
 
 // Set display name for the component
-ChatInput.displayName = 'ChatInput'; 
+ChatInput.displayName = 'ChatInput';

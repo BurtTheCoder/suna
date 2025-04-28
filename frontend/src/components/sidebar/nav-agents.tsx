@@ -34,7 +34,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from "@/components/ui/tooltip"
-import { getProjects, getThreads, Project } from "@/lib/api"
+import { getProjects, getThreads, deleteThread, Project } from "@/lib/api"
 import Link from "next/link"
 
 // Thread with associated project info for display in sidebar
@@ -293,7 +293,20 @@ export function NavAgents() {
                           </a>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={async () => {
+                          try {
+                            setLoadingThreadId(thread.threadId);
+                            await deleteThread(thread.threadId);
+                            toast.success("Thread deleted successfully");
+                            // Refresh the threads list
+                            loadThreadsWithProjects(false);
+                          } catch (error) {
+                            console.error("Error deleting thread:", error);
+                            toast.error("Failed to delete thread");
+                          } finally {
+                            setLoadingThreadId(null);
+                          }
+                        }}>
                           <Trash2 className="text-muted-foreground" />
                           <span>Delete</span>
                         </DropdownMenuItem>

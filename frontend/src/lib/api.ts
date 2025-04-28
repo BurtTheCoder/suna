@@ -1051,6 +1051,16 @@ export const toggleThreadPublicStatus = async (threadId: string, isPublic: boole
   return updateThread(threadId, { is_public: isPublic });
 };
 
+export const deleteThread = async (threadId: string): Promise<void> => {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from('threads')
+    .delete()
+    .eq('thread_id', threadId);
+  
+  if (error) throw error;
+};
+
 // Function to get public projects
 export const getPublicProjects = async (): Promise<Project[]> => {
   try {
@@ -1375,4 +1385,3 @@ export const checkBillingStatus = async (): Promise<BillingStatusResponse> => {
     throw error;
   }
 };
-
